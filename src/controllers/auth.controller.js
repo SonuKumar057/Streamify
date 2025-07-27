@@ -57,7 +57,7 @@ export async function signup(req, res) {
       secure: process.env.NODE_ENV === "production",
     });
 
-    res.status(201).json({ success: true, user: newUser });
+    res.status(201).json({ success: true, user: newUser, token });
   } catch (error) {
     console.log("Error in signup controller", error);
     res.status(500).json({ message: "Internal Server Error" });
