@@ -28,9 +28,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
 
-app.get("/",(req,res)=>{
-  res.send("App is working");
-})
+// app.get("/",(req,res)=>{
+//   res.send("App is working");
+// })
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
