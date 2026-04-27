@@ -32,23 +32,23 @@ const SignUpPage = () => {
 
   return (
     <div
-      className="h-screen flex items-center justify-center p-4 sm:p-6 md:p-8"
+      className="flex items-center justify-center h-screen p-4 sm:p-6 md:p-8"
       data-theme="forest"
     >
-      <div className="border border-primary/25 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100 rounded-xl shadow-lg overflow-hidden">
+      <div className="flex flex-col w-full max-w-5xl mx-auto overflow-hidden border shadow-lg border-primary/25 lg:flex-row bg-base-100 rounded-xl">
         {/* SIGNUP FORM - LEFT SIDE */}
-        <div className="w-full lg:w-1/2 p-4 sm:p-8 flex flex-col">
+        <div className="flex flex-col w-full p-4 lg:w-1/2 sm:p-8">
           {/* LOGO */}
-          <div className="mb-4 flex items-center justify-start gap-2">
+          <div className="flex items-center justify-start gap-2 mb-4">
             <ShipWheelIcon className="size-9 text-primary" />
-            <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
-              Streamify
+            <span className="font-mono text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              Talkzen
             </span>
           </div>
 
           {/* ERROR MESSAGE IF ANY */}
           {error && (
-            <div className="alert alert-error mb-4">
+            <div className="mb-4 alert alert-error">
               <span>{error.response.data.message}</span>
             </div>
           )}
@@ -59,59 +59,59 @@ const SignUpPage = () => {
                 <div>
                   <h2 className="text-xl font-semibold">Create an Account</h2>
                   <p className="text-sm opacity-70">
-                    Join Streamify and start your language learning adventure!
+                    Join Talkzen and start your language learning adventure!
                   </p>
                 </div>
 
                 <div className="space-y-3">
                   {/* FULLNAME */}
-                  <div className="form-control w-full">
+                  <div className="w-full form-control">
                     <label className="label">
                       <span className="label-text">Full Name</span>
                     </label>
                     <input
                       type="text"
                       placeholder="John Doe"
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                       value={signupData.fullName}
                       onChange={(e) => setSignupData({ ...signupData, fullName: e.target.value })}
                       required
                     />
                   </div>
                   {/* EMAIL */}
-                  <div className="form-control w-full">
+                  <div className="w-full form-control">
                     <label className="label">
                       <span className="label-text">Email</span>
                     </label>
                     <input
                       type="email"
                       placeholder="john@gmail.com"
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                       value={signupData.email}
                       onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
                       required
                     />
                   </div>
                   {/* PASSWORD */}
-                  <div className="form-control w-full">
+                  <div className="w-full form-control">
                     <label className="label">
                       <span className="label-text">Password</span>
                     </label>
                     <input
                       type="password"
                       placeholder="********"
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                       value={signupData.password}
                       onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
                       required
                     />
-                    <p className="text-xs opacity-70 mt-1">
+                    <p className="mt-1 text-xs opacity-70">
                       Password must be at least 6 characters long
                     </p>
                   </div>
 
                   <div className="form-control">
-                    <label className="label cursor-pointer justify-start gap-2">
+                    <label className="justify-start gap-2 cursor-pointer label">
                       <input type="checkbox" className="checkbox checkbox-sm" required />
                       <span className="text-xs leading-tight">
                         I agree to the{" "}
@@ -122,7 +122,7 @@ const SignUpPage = () => {
                   </div>
                 </div>
 
-                <button className="btn btn-primary w-full" type="submit">
+                <button className="w-full btn btn-primary" type="submit">
                   {isPending ? (
                     <>
                       <span className="loading loading-spinner loading-xs"></span>
@@ -133,7 +133,7 @@ const SignUpPage = () => {
                   )}
                 </button>
 
-                <div className="text-center mt-4">
+                <div className="mt-4 text-center">
                   <p className="text-sm">
                     Already have an account?{" "}
                     <Link to="/login" className="text-primary hover:underline">
@@ -147,14 +147,14 @@ const SignUpPage = () => {
         </div>
 
         {/* SIGNUP FORM - RIGHT SIDE */}
-        <div className="hidden lg:flex w-full lg:w-1/2 bg-primary/10 items-center justify-center">
+        <div className="items-center justify-center hidden w-full lg:flex lg:w-1/2 bg-primary/10">
           <div className="max-w-md p-8">
             {/* Illustration */}
-            <div className="relative aspect-square max-w-sm mx-auto">
+            <div className="relative max-w-sm mx-auto aspect-square">
               <img src="/i.png" alt="Language connection illustration" className="w-full h-full" />
             </div>
 
-            <div className="text-center space-y-3 mt-6">
+            <div className="mt-6 space-y-3 text-center">
               <h2 className="text-xl font-semibold">Connect with language partners worldwide</h2>
               <p className="opacity-70">
                 Practice conversations, make friends, and improve your language skills together

@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import FriendRequest from "../models/FriendRequest.js";
+import { upsertStreamUser } from "../lib/stream.js";
 
 export async function getRecommendedUsers(req, res) {
   try {
@@ -97,6 +98,10 @@ export async function acceptFriendRequest(req, res) {
     friendRequest.status = "accepted";
     await friendRequest.save();
 
+    // Get both users' data
+    const sender = await User.findById(friendRequest.sender);
+    const recipient = await User.findById(friendRequest.recipient);
+
     // add each user to the other's friends array
     // $addToSet: adds elements to an array only if they do not already exist.
     await User.findByIdAndUpdate(friendRequest.sender, {
@@ -106,6 +111,22 @@ export async function acceptFriendRequest(req, res) {
     await User.findByIdAndUpdate(friendRequest.recipient, {
       $addToSet: { friends: friendRequest.sender },
     });
+
+    // Ensure both users exist in Stream
+    try {
+      await upsertStreamUser({
+        id: sender._id.toString(),
+        name: sender.fullName,
+        image: sender.profilePic || "",
+      });
+      await upsertStreamUser({
+        id: recipient._id.toString(),
+        name: recipient.fullName,
+        image: recipient.profilePic || "",
+      });
+    } catch (error) {
+      console.log("Error upserting users to Stream:", error);
+    }
 
     res.status(200).json({ message: "Friend request accepted" });
   } catch (error) {
